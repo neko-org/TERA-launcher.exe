@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <link href="/css/login.css" rel="stylesheet" />
+    <script src="/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/js/login.js" type="text/javascript"></script>
+  </head>
+  
+  <body id="login-body">
+
+    <div id="login-container">
+      <img src="images/ajax-loader.gif" alt="loading" id="loading-icon" />
+      <div id="response-container" style="display:none;">
+        <p>Unable to connect to login server.</p><br />
+        <form><input type="button" value="Retry" class="login-form-retry" /></form>
+      </div>
+    </div>
+
+    <!-- 
+    <div id="Launch">
+        <script type="text/javascript">
+            var messageNumber = 1;
+            function gameLaunch() {
+                parent.copyCub.launchGame("TestCopyData.exe");
+                messageNumber++;
+            }
+            function gameSendMessage() {
+                parent.copyCub.sendMessage("Some data: " + messageNumber);
+                messageNumber++;
+            }
+        </script>
+        <form>
+            <input type="button" value="Launch game" onclick="gameLaunch()" />
+        </form>
+        <form>
+            <input type="button" value="Send game message" onclick="gameSendMessage()" />
+        </form>
+    </div>
+    -->
+    
+  </body>
+<html>

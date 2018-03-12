@@ -1,0 +1,624 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title></title>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="mainwindow.css" />
+    <link href='https://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://mpsnare.iesnare.com/snare.js"></script>
+    <script type="text/javascript">
+        var io_install_flash = false;
+        var io_install_stm = false;
+
+        var io_bb_callback = function(bb, complete) {
+            //console.log("Iovation callback");
+            //console.log("DEBUG Iovation blackbox: ", complete, bb);
+
+            if(complete)
+                window.blackBox = encodeURIComponent(bb);
+        };
+    </script>
+</head>
+
+<body>
+        <!-- Header contains Nav and Language-->
+        <div id="header">
+            <div id="windowMoveGripArea">
+                <div id="logo">
+                    <a href="#"></a>
+                </div>
+                <ul id="nav">
+                    <li id="paneHome" class="active"><a href="#">UI_Start</a></li>
+                    <li id="paneNews"><a href="#">UI_News</a></li>
+                    <li id="paneSettings"><a href="#">UI_Settings</a></li>
+                    <li id="paneSupport"><a href="#">UI_Support</a></li>
+                </ul>
+                <ul id="loggedin">
+                    <li id="savedLoginName"></li>
+                    <li><a class="loggout_link" href="#">UI_Logout</a></li>
+                </ul>
+                <ul id="flags">
+                    <li id="de-de"><a href="#"><img src="/images/de.png" /></a></li>
+                    <li id="fr-fr"><a href="#"><img src="/images/fr.png" /></a></li>
+                    <li id="en-us"><a href="#"><img src="/images/gb.png" /></a></li>
+                </ul>
+                <ul id="windowControls">
+                    <!-- TODO: remove the Support and Settings from Nav and use these -->
+                    <!--
+                        <li id="tools"><img src="images/newskin/tools_button.png" width="20px" /></li>
+                        <li id="options"><img src="images/newskin/launcher_settings_button.png" width="20px"/></li>
+                    -->
+                    <li id="windowMinimize"><img src="images/newskin/minimize_button.png" /></li>
+                    <li id="windowClose"><img src="images/newskin/close_button.png" /></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Disables access to content screen -->
+        <div id="contentOverlay"></div>
+
+        <!-- RSS Card Viewer -->
+        <div id="rssContainer">
+            <div class="rssCloseIcon"></div>
+            <div class="rssViewerParent">
+                <div class="rssViewerBottom"></div>
+                <div class="rssViewer scrollBlack">
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div id="contentWrapper" class="contentBackground">
+
+            <!-- Background -->
+            <div id="contentBackground" class="contentBackground"></div>
+
+            <!-- Start Page - 3 Thumbnails -->
+            <div class="content selected">
+                <div id="start_page">
+                    <div id="start_page_normal">
+                        <a href="#" class="teraclub"></a>
+                    </div>
+                    <div id="start_page_ihh">
+                        <div id="ihh_eyecatcher"></div>
+                        <div id="ihh_text">
+
+                            <img src="/images/newskin/happy_hour.png" /><br />
+                            <br />
+                            <span class="ihh_text1">EarlyIndividualHH_Subtitle</span><br />
+                            <br />
+                            <span class="ihh_text1">EarlyIndividualHH_Subtitle2</span><br />
+                            <br />
+                            <span class="ihh_text3">EarlyIndividualHH_Precounter</span>
+                            <span class="ihh_text4" id="ihh_countdown">00d 00h 00m 00s</span>
+                            <br />
+                            <a href="#" id="ihh_button"></a>
+
+                        </div>
+                    </div>
+                    <div id="thumbsRss" class="">
+                    </div>
+                </div>
+            </div>
+
+            <!-- News Page - RSS Feeds -->
+            <div class="alt_background content">
+                <div id="news_page" class="scrollBlack">
+                    <div id="rss" class=""></div>
+                </div>
+                <!-- News Page - 3 Thumbnails -->
+                <!--<div id="rss" class="white_head scrollBlack"></div>-->
+                <div id="thumbsRssNews" class="">
+                </div>
+            </div>
+
+            <!-- Options Page -->
+            <div class="alt_background content">
+                <div id="options_page">
+                    <div class="options_header">
+                        <div class="options_hex">
+                            <h1>UI_Settings</h1>
+                        </div>
+                    </div>
+                    <ul id="options_nav">
+                        <li><a class="active" href="#">UI_General_Settings</a></li>
+                        <li><a href="#">UI_TrafficShaping</a></li>
+                        <li><a href="#">UI_Performance</a></li>
+                        <li>&nbsp;</li>
+                        <li><a href="#">UI_ServerStatus</a></li>
+                    </ul>
+                    <div id="options_container">
+                        <div class="options_content selected">
+                            <!-- General Options -->
+                            <div id="debug">
+                                <h2>UI_General_Settings</h2>
+                                <div>UI_DebugDescription</div>
+                                <br>
+                                <form>
+                                    <input type="checkbox" id="debugFile" name="debugFile" class="debugFile" /><label for="debugFile">UI_DebugFile</label>
+                                    <input type="checkbox" id="debugConsole" name="debugConsole" class="debugConsole" /><label for="debugConsole">UI_DebugConsole</label>
+                                </form>
+                                <br>
+                            </div>
+                            <!-- repair container -->
+                            <hr />
+                            <div id="repairDiv" class="settingsItem repair">
+                                <h2>UI_Repair_Header</h2>
+                                <p>UI_Repair_Description</p>
+                                <!-- Repair Button -->
+                                <!--<p id="buttonRepair"><a href="#" class="patchRepair" rel="tooltip" title="Repair Download">Repair Download</a></p>-->
+                                <div id="buttonRepair"><a href="#">UI_Repair</a></div>
+                            </div>
+                        </div>
+                        <div class="options_content">
+                            <!-- Network Options -->
+                            <div id="settings">
+                                <div class="settingsHeader">
+                                    <h2>UI_TrafficShaping</h2>
+                                </div>
+                                <p>UI_Network_Description</p>
+                                <br>
+                                <form action="">
+                                    <!--- Background Downloading -->
+                                    <!--- Put this back in...did not have time to wire it up
+                                        <input type="radio" value="1" /><label></label><br />
+                                        <input type="radio" value="1" /><label></label>
+                                    --->
+                                    <!-- Download Method -->
+                                    <div class="settingsItem networkSettings">
+                                        <!-- Removing P2P Controls at Gameforges request.
+                                        <label>UI_Allow</label>
+                                        <select name="downloadMethod">
+                                            <option value="wp">UI_P2P_HTTP</option>
+                                            <option value="w">UI_HTTP</option>
+                                            <option value="p">UI_P2P</option>
+                                        </select>
+                                        <p>
+                                            UI_P2P_Description
+                                        </p><br />-->
+                                        <label>UI_MaxDownload</label>
+                                        <select name="maxDownloadSpeed">
+                                            <option value="0">UI_Unlimited</option>
+                                            <option value="65536">64</option>
+                                            <option value="131072">128</option>
+                                            <option value="262144">256</option>
+                                            <option value="524288">512</option>
+                                            <option value="1048576">1024</option>
+                                            <option value="2097152">2048</option>
+                                            <option value="4194304">4096</option>
+                                        </select>
+                                        <p>
+                                            UI_MaxDownload_Description
+                                        </p><br />
+                                        <!-- No point in keeping Upload Speed with P2P disabled.
+                                        <label>UI_MaxUpload</label>
+                                        <select name="maxUploadSpeed">
+                                            <option value="0">UI_Unlimited</option>
+                                            <option value="65536">64</option>
+                                            <option value="131072">128</option>
+                                            <option value="262144">256</option>
+                                            <option value="524288">512</option>
+                                            <option value="1048576">1024</option>
+                                        </select>
+                                        <p>
+                                            UI_MaxUpload_Description
+                                        </p>-->
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="options_content">
+                            <!-- Network Monitor -->
+                            <div id="settingDownloadGraph" class="settingsItem performanceSetting graphContainer">
+                                <h2>UI_Performance</h2>
+                                <div>UI_NetworkMonitor_Description</div>
+                                <br>
+                                <div id="downloadGraph"></div>
+                                <ul id="incomingSpeed">
+                                    <li>UI_Incoming</li>
+                                    <li><span class="curSpeed"></span> <span>UI_Cur</span></li>
+                                    <li><span class="avgSpeed"></span> <span>UI_Avg</span></li>
+                                    <li><span class="maxSpeed"></span> <span>UI_Max</span></li>
+                                </ul>
+                                <ul id="outgoingSpeed">
+                                    <li>UI_Outgoing</li>
+                                    <li><span class="curSpeed"></span> <span>UI_Cur</span></li>
+                                    <li><span class="avgSpeed"></span> <span>UI_Avg</span></li>
+                                    <li><span class="maxSpeed"></span> <span>UI_Max</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="options_content">
+                            <!-- HACK: empty content area for Nav empty li -->
+                        </div>
+                        <div class="options_content">
+                            <!-- Server Status -->
+                            <div class="serverStatsContainer">
+                                <div class="serverStatusHeader">
+                                    <h2>UI_ServerStatus</h2>
+                                    <p>UI_ServerInfo</p>
+                                </div>
+                                <div class="serverStatusError">
+                                    <p>UI_Server_Status_Unavailable</p>
+                                </div>
+                                <div class="serverStatus">
+                                    <table class="statusTable" id="statusTable">
+                                        <thead>
+                                        <td>UI_Status</td>
+                                        <td>UI_Server_Name</td>
+                                        <td>UI_Server_Type</td>
+                                        <td>UI_Server_Population</td>
+                                        <td>UI_Server_Language</td>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Support (Arranged from Right-to-Left; List first items at the bottom and last items at the top
+                 i.e. Order goes 5, 4, 3, 2, 1 to render 1, 2, 3, 4, 5.) -->
+            <div class="alt_background content">
+                <div id="support" class="scrollWhite">
+                    <div class="support_container">
+                        <div class="support_header">
+                            <div class="support_hex">
+                                <h1>UI_Support</h1>
+                            </div>
+                        </div>
+
+                        <div class="support_description_text">UI_Support_Description</div>
+
+                        <div class="support_thumbs">
+                            <span class="faq"><a href="#">UI_FAQ</a></span>
+                            <span class="forum"><a href="#">UI_HelpForum</a></span>
+                            <span class="support"><a href="#">UI_Support</a></span>
+                        </div>
+
+                        <div>UI_DebugDescription</div>
+                        <br>
+                        <input type="checkbox" id="supportDebugFile" class="debugFile"><label for="supportDebugFile">UI_DebugFile</label>
+                        <input type="checkbox" id="supportDebugConsole" class="debugConsole"><label for="supportDebugConsole">UI_DebugConsole</label>
+                        <br>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <div id="footer" class="active">
+            <!-- Download Stats -->
+            <div id="downloadInfo">
+                <ul id="stateInfo">
+                    <li id="downloadStatus" class="patchStatus downloadStatus"></li>
+                    <li id="downloadSpeed" class="downloadTotalDownloadSpeed patchWriteSpeed"></li>
+                    <li id="bytesDownloaded" class="downloadBytesRemaining patchBytesRemaining"></li>
+                    <li id="patchesLeft" class="patchesLeft"></li>
+                    <li id="timeRemaining" class="downloadTimeRemaining patchTimeRemaining"></li>
+                </ul>
+            </div>
+            <!-- Progress Bar -->
+            <!--<div id="progressBar"><div id="progressBarEmpty"><div class="progressBarFull downloadProgress patchProgress"></div><span class="patchStatus downloadStatus"></span></div></div>-->
+            <div id="progressBar"><div id="progressBarEmpty"><div class="progressBarFull downloadProgress patchProgress"></div><span id="downloadPercent" class="downloadPercent patchPercent"></span></div></div>
+
+            <!--Percent Complete -->
+            <!--<p id="percentComplete" class="downloadPercent patchPercent"></p>-->
+            <!-- Pause / Resume / Launch Button-->
+            <p id="buttonPause"><a href="#" class="downloadPauseResume" title="UI_Pause">UI_Pause</a></p>
+            <p id="buttonResume"><a href="#" class="downloadPauseResume" title="UI_Resume">UI_Resume</a></p>
+            <p id="buttonLaunch"><a href="#" class="actionPatchPlay" title="UI_Launch">UI_Play</a></p>
+
+            <!--    <div class="">
+                    <ul id="titleLine">
+                        <li id="title" class="patchTitle"></li>
+                        <li id="patchesLeft" class="patchesLeft"></li>
+                    </ul>
+                </div>-->
+
+
+
+        </div>
+
+        <!-- Login Modal-->
+        <div id="loginModal" class="systemModal systemModalSlim scrollWhite">
+            <div class="login_header">
+                <div class="login_logo"></div>
+                <div class="login_hex"></div>
+                <div class="login_header_text"><h1 class="register_header">LoginAuthenticate_Header</h1></div>
+                <div class="login_cancel"></div>
+            </div>
+            <div class="modalContent">
+                <form>
+                    <label for="username" class="labelUsername">WebAuthenticate_UserName</label>
+                    <input type="text" name="loginUsername" size="15" id="loginUsername" />
+                    <label for="password" class="labelPassword">WebAuthenticate_Password</label>
+                    <input type="password" name="loginPassword" size="15" id="loginPassword" />
+                    <input type="checkbox" id="saveUsernameCheck" class="" checked />
+                    <label for="saveUsernameCheck">WebAuthenticate_saveUserName</label>
+                    <div class="forgotPassword">
+                        <span><a class="forgotPasswordLink" href="#">UI_Recover_Password</a></span>
+                    </div>
+                    <div class="login_btn_wrapper">
+                        <div class="login_loading"><img src="/images/newskin/loading.gif" /></div>
+                        <input type="submit" value="UI_Login" id="buttonLogin" />
+                    </div>
+                </form>
+            </div>
+            <div class="errorNote">
+                <span id="badLogin">LoginAuthenticate_BadLogin</span>
+            </div>
+            <div class="accountRegister">
+                <p>Login_ToRegister</p>
+                <span><a id="signupButton" class="registerAccountLink btn_black" href="#">UI_Signup_Now</a></span>
+            </div>
+
+
+        </div>
+
+        <!-- Register Modal-->
+        <div id="registerModal" class="systemModal systemModalSlim scrollWhite">
+            <div class="login_header">
+                <div class="login_logo"></div>
+                <div class="login_hex"></div>
+                <div class="login_header_text"><h1 class="register_header">Register_Header</h1></div>
+                <div id="registerCancel" class="login_cancel"></div>
+            </div>
+            <div class="modalContent">
+                    <label for="username" class="labelUsername">Register_Email</label>
+                    <input type="text" id="registerUsername" size="15" />
+                    <label for="password" class="labelPassword">WebAuthenticate_Password</label>
+                    <input type="password" id="registerPassword" size="15" />
+                    <div>
+                        <p class="small">Register_Password_Restriction</p>
+                    </div>
+                    <div class="login_btn_wrapper">
+                        <div class="login_loading"><img src="/images/newskin/loading.gif" /></div>
+                        <input type="submit" value="Register_Submit" id="modalRegisterButton" />
+                    </div>
+                    <div>
+                        <p class="badLoginSteam" id="registerModalError"></p>
+                    </div>
+            </div>
+            <div class="accountLogin">
+                <p>Register_ToLogin</p>
+                <span><a id="loginButton" class="registerAccountLink btn_black" href="#">Register_Login</a></span>
+            </div>
+        </div>
+
+        <!-- Steam Login Modal-->
+        <div id="steamModal" class="systemModal scrollWhite steamLoading">
+            <div class="steamModalInner">
+                <div class="steamModalHeadline"><span>LoginAuthenticate_Header</span></div>
+                <div class="steamModalContent">
+                    <img src="/images/newskin/loading.gif" />
+                    <p id="steamProgress"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="steamErrorModal" class="systemModal scrollWhite steamError">
+            <div class="steamModalInner">
+                <div class="steamModalHeadline"><span>LoginAuthenticate_Header</span></div>
+                <div class="steamModalContent">
+                    <p id="steamError"></p>
+                </div>
+                <div class="steam-btn-wrapper">
+                    <button class="steamButton" id="steamErrorClose">UI_Ok</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="steamLinkingModal" class="systemModal scrollWhite">
+            <div class="steamModalInner">
+                <div class="steamModalHeadline"><span>LoginAuthenticate_Header</span></div>
+                <div class="steamModalContent">
+                    <img src="/images/newskin/steam_logo.png">
+					<br />
+					<br />
+					<div class="steamclearfix">
+						<div class="colm floatleft">
+							<button class="steamButton steamButtonBig" id="steamCreateButton">UI_SteamCreate</button>
+							<p>UI_SteamCreateText</p>
+						</div>
+						<div class="colm floatleft">
+							<button class="steamButton steamButtonBig" id="steamGoLinkingButton">UI_SteamLink</button>
+							<p>UI_SteamLinkText</p>
+						</div>
+					</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="steamLinkingLoginModal" class="systemModal scrollWhite">
+            <div class="steamModalInner">
+                <div class="steamModalHeadline"><span>LoginAuthenticate_Header</span></div>
+                <div class="steamModalContent login">
+                    <label class="steamLabel">WebAuthenticate_UserName</label>
+                    <input type="text" name="steamUsername" id="steamUsername" class="steamInput" />
+                    <label class="steamLabel">WebAuthenticate_Password</label>
+                    <input type="password" name="steamPassword" id="steamPassword" class="steamInput" />
+                    <p>UI_TocText</p>
+                    <div class="steam-btn-wrapper">
+                        <a href="#" class="steamLink" id="steamLinkingReturn">UI_Cancel</a> <button id="modalSteamLinkingButton" class="steamButton">UI_SteamLinkLogin</button>
+                    </div>
+                    <p id="spinnerLinking" style="text-align:center; display:none;"><img src="/images/newskin/loading.gif" /></p>
+                    <p class="badLoginSteam" id="badLoginSteam"></p>
+                </div>
+            </div>
+        </div>
+
+        <div id="pwResetModal" class="systemModal scrollWhite steamError">
+            <div class="steamModalInner">
+                <div class="steamModalHeadline"><span style="left:85px">UI_PasswordReset</span></div>
+                <div class="steamModalContent width80pct">
+                    <p id="pwResetP">UI_PasswordResetText</p>
+                    <br />
+                    <br />
+                    <button class="steamButton" id="pwResetResend">UI_PasswordResetResend</button>
+                    <p id="pwResetPResetText">UI_PasswordResetResendText</p>
+                    <p id="pwResetPResetSpinner" style="text-align:center; display:none;"><img src="/images/newskin/loading.gif" /></p>
+                </div>
+                <div class="steam-btn-wrapper">
+                    <button class="steamButton" id="pwResetClose">UI_Ok</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="errorModal" class="systemModal scrollWhite steamError">
+            <div class="steamModalInner">
+                <div class="steamModalHeadline"><span>UI_Error</span></div>
+                <div class="steamModalContent">
+                    <p id="errorP"></p>
+                </div>
+                <div class="steam-btn-wrapper">
+                    <button class="steamButton" id="errorClose">UI_Ok</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Device Activation Modal-->
+        <div id="deviceActivationModal" class="systemModal scrollWhite">
+            <div class="deviceActivation_Header">
+                <div class="login_logo"></div>
+                <div class="deviceactivation_header_text">DeviceActivation_Header</div>
+                <div class="deviceactivation_cancel"></div>
+            </div>
+            <p class="deviceActivation_desc1">DeviceActivation_desc1</p>
+            <p class="deviceActivation_desc2">DeviceActivation_desc2</p>
+            <div>
+                <form>
+                    <div class="row">
+                        <div class="left"><label for="deviceActivationCode" class="labelActivationCode">DeviceActivation_Code</label></div>
+                        <div class="right"><input type="text" name="deviceActivationCode" size="15" id="txtDeviceActivationCode" /></div>
+                        <!--<label for="deviceActivationCode" class="labelActivationCode">DeviceActivation_Code</label>
+                        <input type="text" name="deviceActivationCode" size="15" id="txtDeviceActivationCode" />-->
+                    </div>
+                    <div class="rememberDevice-group">
+                        <div class="center">
+                            <input type="checkbox" id="chkRememberDevice" class="" checked />
+                            <label for="chkRememberDevice" class="labelRememberDevice">DeviceActivation_RememberDevice</label>
+                        </div>
+                    </div>
+                    <div class="buttonRow">
+                        <div id="buttonAuthorize">
+                            <div class="buttonAuthorizeText">
+                                <a href="#">UI_Authorize</a>
+                            </div>
+                        </div>
+                    </div>
+                <div class="lastRow">
+                <div>
+                    <span class="resend_code"><a href="#" id="send_deviceactivation">DeviceActivation_ResendCode</a></span> | <span class="cancel_deviceactivation">UI_Cancel</span>
+                </div>
+                <div class="activationErrorRow"><span class="activationErrorText">Error Code</span></div>
+            </div>
+        </form>
+    </div>
+    <!--<input type="submit" value="UI_Authorize" id="buttonAuthorize" />-->
+</div>
+
+<!-- Multiple Account Modal-->
+<div id="multiAccountModal" class="systemModal scrollWhite">
+    <div class="multiAccount_Header">
+        <div class="login_logo"></div>
+        <div class="multiAccount_header_text">MultiAccount_Header</div>
+        <div class="multiAccount_cancel"></div>
+    </div>
+    <p class="multiAccount_desc1">MultiAccount_desc1</p>
+    <!--- need some dynamic rows here -->
+    <div class="multiAccount_desc2">
+        <ul id="user_select">
+
+        </ul>
+    </div>
+</div>
+
+    <!-- RSS Modal -->
+
+<!-- Web Authenticate Modal-->
+<div id="webAuthenticateModal" class="systemModal scrollWhite">
+    <h1>UI_WebAuthenticateHeader</h1>
+    <h2></h2>
+    <div class="modalContent">
+        <form>
+            <span>
+                <label>WebAuthenticate_Server</label>
+                <label class="server"></label>
+            </span>
+
+            <span>
+                <label>WebAuthenticate_Port</label>
+                <label class="port"></label>
+            </span>
+
+            <span>
+                <label><b>WebAuthenticate_Realm</b></label>
+                <label class="realm"></label>
+            </span>
+
+            <label for="username">WebAuthenticate_UserName</label>
+            <input type="text" name="username" size="15" />
+
+            <label for="password">WebAuthenticate_Password</label>
+            <input type="password" name="password" size="15" />
+
+            <input type="submit" class="modalOk" value="UI_Ok"  />
+            <input type="button" class="modalCancel" value="UI_Cancel" />
+        </form>
+    </div>
+</div>
+
+<!-- Repair Modal-->
+<div id="repairModal" class="systemModal scrollWhite">
+    <h1>UI_RepairHeader</h1>
+    <div class="modalContent repairContent">
+        <p>UI_RepairDesc</p>
+        <button class="modalOk">UI_Ok</button>
+        <button class="modalCancel">UI_Cancel</button>
+    </div>
+</div>
+
+<div id="shutDownMessage"><p>UI_Shutting_Down</p></div>
+
+
+
+<script src="/js/json2.min.js" type="text/javascript"></script>
+
+<script src="js/jquery-1.8.0.min.js"></script>
+
+<script src="/js/jquery.flot.min.js"></script>
+<script src="/js/jquery.xml2json.js"></script>
+<script src="/js/jquery.zrssfeed.js"></script>
+<script src="js/jquery.zrssfeed.startpage.js"></script>
+<script src="/js/jquery.masonry.min.js"></script>
+<script src="/js/jquery.easing.1.3.js"></script>
+<script src="/js/jquery.tooltips.js"></script>
+<script src="/js/jquery.dateformat-1.0.min.js"></script>
+
+
+
+<script src="/js/host-3.6.8.1.min.js" type="text/javascript"></script>
+<script src="/js/downloader-3.6.8.1.js" type="text/javascript"></script>
+<script src="/js/patcher-3.6.8.1.min.js" type="text/javascript"></script>
+<script src="/js/analytics-3.6.8.1.min.js" type="text/javascript"></script>
+<script src="/js/patcher-hotfix.js" type="text/javascript"></script>
+
+<script src="/js/unifiedprogress.js" type="text/javascript"></script>
+
+    <script src="mainwindow.js" type="text/javascript"></script>
+
+    <script src="/js/copycub.js"></script>
+    <script src="/js/launcher.js"></script>
+
+    <script src="/js/StartupController.js"></script>
+    <script src="/js/LoginController.js"></script>
+    <script src="/js/SteamController.js"></script>
+    <script src="/js/SteamLoginController.js"></script>
+</body>
+</html>
+

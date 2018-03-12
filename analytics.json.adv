@@ -1,0 +1,238 @@
+{
+    "hostStart":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Workflow",
+        "notification": "DidLoad",
+        "filters": [ ],
+        "reports":
+        [
+            { "name": "event", "value": "ApplicationStart"},
+            { "name": "host", "value": "@app.{Host}"},
+            { "name": "hostVersion", "value": "@app.{HostVersion}"},
+            { "name": "system", "value": "@app.{SystemName}"},
+            { "name": "systemVersion", "value": "@app.{SystemVersion}"},
+            { "name": "systemBitness", "value": "@app.{SystemBitness}"},
+            { "name": "systemLangName", "value": "@app.{UserISO639LangName}"},
+            { "name": "systemLangCountry", "value": "@app.{UserISO3166CountryName}"},
+			{ "name": "applicationName", "value": "@app.{AppName}"},
+			{ "name": "skinVersion", "value": "@app.{SkinVersion}"},
+			{ "name": "customerId", "value": "@app.{CustomerID}"},
+			{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "hostStop":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Workflow",
+        "notification": "WillUnload",
+        "filters": [ ],
+        "reports":
+        [   
+            { "name": "event", "value": "ApplicationStop"},
+            { "name": "timeLoad", "value": "@skinWindowView.loadTime"},
+            { "name": "timeRunning", "value": "@app.runningTime"},
+			{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "downloadStart":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Download",
+        "notification": "StateChange",
+        "filters": [ 
+            { "name": "@args.state", "value": "@downloadState.DOWNLOAD" },
+            { "name": "@this.sessionState.startCount", "value": 1 }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "DownloadStart"},
+            { "name": "title", "value": "@this.identifier"},
+            { "name": "pieces", "value": "@this.sessionState.piecesCompleteBeforeDownload" },
+			{ "name": "email", "value": "@app.{userEmail}" },
+			{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "downloadStop":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Download",
+        "notification": "Stop",
+        "filters": [ ],
+        "reports":
+        [   
+            { "name": "event", "value": "DownloadStop"},
+            { "name": "title", "value": "@this.identifier"},
+            { "name": "completed", "value": "@this.completed"},
+            { "name": "timeToFirstWebByte", "value": "@this.sessionTimeElapsed.timeToFirstWebByte" },
+            { "name": "timeToFirstPeerByte", "value": "@this.sessionTimeElapsed.timeToFirstPeerByte" },
+            { "name": "timeToComplete", "value": "@this.sessionTimeElapsed.timeToComplete" },
+            { "name": "timeSeeding", "value": "@this.sessionTimeElapsed.timeSeeding" },
+            { "name": "timePaused", "value": "@this.sessionTimeElapsed.timePaused" },
+            { "name": "timeDownloading", "value": "@this.sessionTimeElapsed.timeDownloading" },
+            { "name": "timeChecking", "value": "@this.sessionTimeElapsed.timeChecking" },
+            { "name": "timeOverall", "value": "@this.sessionTimeElapsed.timeOverall" },
+            { "name": "bytesRead", "value": "@this.transferTotal.bytesRead" },
+            { "name": "bytesSent", "value": "@this.transferTotal.bytesSent" },
+            { "name": "bytesConfirmed", "value": "@this.transferTotal.bytesConfirmed" },
+            { "name": "bytesCorrupt", "value": "@this.transferTotal.bytesCorrupt" },
+            { "name": "bytesDiscarded", "value": "@this.transferTotal.bytesDiscarded" },
+		    { "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "downloadComplete":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Download",
+        "notification": "Complete",
+        "filters": [ 
+            { "name": "@args.successful", "value": true },
+            { "name": "@this.transferTotal.bytesConfirmed", "operator": ">", "value": 0 }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "DownloadComplete"},
+            { "name": "title", "value": "@this.identifier"},
+            { "name": "timeToFirstWebByte", "value": "@this.sessionTimeElapsed.timeToFirstWebByte" },
+            { "name": "timeToFirstPeerByte", "value": "@this.sessionTimeElapsed.timeToFirstPeerByte" },
+            { "name": "timeToComplete", "value": "@this.sessionTimeElapsed.timeToComplete" },
+            { "name": "timePaused", "value": "@this.sessionTimeElapsed.timePaused" },
+            { "name": "timeDownloading", "value": "@this.sessionTimeElapsed.timeDownloading" },
+            { "name": "timeChecking", "value": "@this.sessionTimeElapsed.timeChecking" },
+            { "name": "timeOverall", "value": "@this.sessionTimeElapsed.timeOverall" },
+            { "name": "bytesRead", "value": "@this.transferTotal.bytesRead" },
+            { "name": "bytesSent", "value": "@this.transferTotal.bytesSent" },
+            { "name": "bytesConfirmed", "value": "@this.transferTotal.bytesConfirmed" },
+            { "name": "bytesCorrupt", "value": "@this.transferTotal.bytesCorrupt" },
+            { "name": "bytesDiscarded", "value": "@this.transferTotal.bytesDiscarded" },
+			{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "downloadFailure":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Download",
+        "notification": "Complete",
+        "filters": [ 
+            { "name": "@args.successful", "value": false }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "DownloadFailure" },
+            { "name": "errorCode", "value": "@this.lastError" },
+            { "name": "title", "value": "@this.identifier"},
+		{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "processStart":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Process",
+        "notification": "Start",
+        "filters": [ ],
+        "reports":
+        [   
+            { "name": "event", "value": "ProcessStart"},
+            { "name": "application", "value": "@this.shortApplicationName"},
+					{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "processFailure":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Process",
+        "notification": "Complete",
+        "filters": [
+            { "name": "@args.successful", "value": false }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "ProcessFailure"},
+            { "name": "application", "value": "@this.shortApplicationName"},
+					{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "processComplete":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Process",
+        "notification": "Complete",
+        "filters": [
+            { "name": "@args.successful", "value": true }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "ProcessComplete" },
+            { "name": "exitCode", "value": "@args.exitCode"},
+            { "name": "timeRunning", "value": "@this.runningTime"},
+            { "name": "application", "value": "@this.shortApplicationName"},
+					{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "patchStart":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Patch",
+        "notification": "Start",
+        "filters": [ ],
+        "reports":
+        [   
+            { "name": "event", "value": "PatchStart"},
+            { "name": "repair", "value": "@this.maskExists" },
+            { "name": "patchname", "value": "@this.shortFileName"},
+					{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "patchComplete":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Patch",
+        "notification": "Complete",
+        "filters": [
+            { "name": "@args.successful", "value": true }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "PatchComplete"},
+            { "name": "repair", "value": "@this.maskExists" },
+            { "name": "patchname", "value": "@this.shortFileName"},
+            { "name": "timeRunning", "value": "@this.runningTime"},
+					{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "patchFailure":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Patch",
+        "notification": "Complete",
+        "filters": [
+            { "name": "@args.successful", "value": false }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "PatchFailure"},
+            { "name": "repair", "value": "@this.maskExists" },
+            { "name": "errorType", "value": "@this.lastErrorType"},
+            { "name": "errorCode", "value": "@this.lastError"},
+            { "name": "patchname", "value": "@this.shortFileName"},
+            { "name": "timeRunning", "value": "@this.runningTime"},
+					{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    },
+    "patchChannelFailure": {
+        "type": "ReportEvent",
+        "notificationType": "PatchChannel",
+        "notification": "Complete",
+        "filters": [
+            { "name": "@args.successful", "value": false }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "PatchChannelFailure"},
+            { "name": "repair", "value": "@this.isRepairing"},
+            { "name": "errorCode", "value": "@this.lastError"},
+            { "name": "url", "value": "@this.httpRequest.url"},
+					{ "name": "distinct_id", "value": "@app.{machineId}"}
+        ]
+    }
+}

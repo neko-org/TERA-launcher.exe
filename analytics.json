@@ -1,0 +1,29 @@
+{   
+    "downloadComplete":
+    {
+        "type": "ReportEvent",
+        "notificationType": "Download",
+        "notification": "Complete",
+        "filters": [ 
+            { "name": "@args.successful", "value": true },
+            { "name": "@this.transferTotal.bytesConfirmed", "operator": ">", "value": 0 }
+        ],
+        "reports":
+        [   
+            { "name": "event", "value": "DownloadComplete"},
+            { "name": "title", "value": "@this.identifier"},
+            { "name": "timeToFirstWebByte", "value": "@this.sessionTimeElapsed.timeToFirstWebByte" },
+            { "name": "timeToFirstPeerByte", "value": "@this.sessionTimeElapsed.timeToFirstPeerByte" },
+            { "name": "timeToComplete", "value": "@this.sessionTimeElapsed.timeToComplete" },
+            { "name": "timePaused", "value": "@this.sessionTimeElapsed.timePaused" },
+            { "name": "timeDownloading", "value": "@this.sessionTimeElapsed.timeDownloading" },
+            { "name": "timeChecking", "value": "@this.sessionTimeElapsed.timeChecking" },
+            { "name": "timeOverall", "value": "@this.sessionTimeElapsed.timeOverall" },
+            { "name": "bytesRead", "value": "@this.transferTotal.bytesRead" },
+            { "name": "bytesSent", "value": "@this.transferTotal.bytesSent" },
+            { "name": "bytesConfirmed", "value": "@this.transferTotal.bytesConfirmed" },
+            { "name": "bytesCorrupt", "value": "@this.transferTotal.bytesCorrupt" },
+            { "name": "bytesDiscarded", "value": "@this.transferTotal.bytesDiscarded" }
+        ]
+    }
+}

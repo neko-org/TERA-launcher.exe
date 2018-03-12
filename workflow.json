@@ -1,0 +1,98 @@
+{
+	"_comment": "Interop loading",
+	"loadPatcher": {
+		"type": "loadInterop",
+		"name": "patcher",
+		"filename": "{ModulePath}{LibraryPrefix}patcher.{LibraryExtension}"
+	},
+	"loadDownloader": {
+		"type": "loadInterop",
+		"name": "downloader",
+		"filename": "{ModulePath}{LibraryPrefix}downloader.{LibraryExtension}"
+	},
+	"loadAnalytics": {
+		"type": "loadAnalytics",
+		"hostname": "gameforgetera.mixpanel.snxd.com",
+		"checkpointPath": "analytics.json",
+		"token": "a97a39731650e7fa1ea1138929af15dd",
+		"debug": true
+	},
+	"loadCopyCub": {
+		"type": "loadInterop",
+		"name": "copycub",
+		"filename": "{ModulePath}CopyCub_3_5.dll"
+	},
+    "loadSteam": {
+        "type": "loadInterop",
+        "name": "steam",
+        "filename": "{ModulePath}SteamInterop.{LibraryExtension}"
+    },
+	"load": {
+		"type": "queue",
+		"concurrentTasks": -1,
+		"actions": [ "loadDownloader", "loadPatcher", "loadSteam", "loadCopyCub", "loadAnalytics" ]
+	},
+	"_comment": "Interop unloading",
+	"unloadPatcher": {
+		"type": "unloadInterop",
+		"name": "patcher",
+		"filename": "{ModulePath}{LibraryPrefix}patcher.{LibraryExtension}"
+	},
+	"unloadDownloader": {
+		"type": "unloadInterop",
+		"name": "downloader",
+		"filename": "{ModulePath}{LibraryPrefix}downloader.{LibraryExtension}"
+	},
+    "unloadSteam": {
+        "type": "unloadInterop",
+        "name": "steam",
+        "filename": "{ModulePath}SteamInterop.{LibraryExtension}"
+    },
+	"unload": {
+		"type": "queue",
+		"concurrentTasks": -1,
+		"actions": [ "unloadDownloader", "unloadPatcher", "unloadSteam" ]
+	},
+	"_comment": "Skin workflow",
+	"updateLauncher": {
+        "type": "patch",
+		"title": "Launcher",
+		"url": "",
+		"allowPartial": false,
+        "uninstall": true
+    },
+    "updateApplication": {
+		"type": "patch",
+		"url": "http://dl.tera.gameforge.com/tera/client/pgc_v2/steam.patchmanifest",
+		"title": "UI_Game"
+    },
+    "clickStartUp": {
+        "type": "startUp",
+        "message": "loginAndLaunch"
+    },
+    "patchApplication": {
+        "type": "patchgroup",
+        "actions": ["updateApplication" ],
+		"singleProgressBar": true,
+        "updateInterval": 10000,
+		"launch": "clickStartUp"
+    },
+    "runStartUp": {
+        "type": "startUp",
+        "message": "start"
+    },
+    "runInit": {
+        "type": "startUp",
+        "message": "init"
+    },
+    "loginAndLaunch": {
+        "type": "uimodal",
+    	"element": "#loginModal",
+		"cancelBehavior": "none"
+    },
+    "start": {
+		"type": "queue",
+		"concurrentTasks": 1,
+		"actions": [ "runInit", "patchApplication", "runStartUp" ]
+    }
+}

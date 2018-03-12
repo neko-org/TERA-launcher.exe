@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<WindowConfig>
+  <Title>Tera - Fate of Arun </Title>
+  <Url>{ContentUrl}mainwindow.html</Url>
+  <WindowFrame>Borderless</WindowFrame>
+  <MinWidth>1208</MinWidth>
+  <MinHeight>806</MinHeight>
+  <!-- For windows host only -->
+  <Windows>
+      <UseNotificationArea>TRUE</UseNotificationArea>
+      <MinimizeToNotificationArea>FALSE</MinimizeToNotificationArea>
+  </Windows>
+  <!-- For IE host only -->
+  <IE>
+      <!--<Debug>TRUE</Debug>-->
+  </IE>
+  <!-- For CEF host only -->
+  <CEF>
+    <EnableDeveloperTools>FALSE</EnableDeveloperTools>
+    <EnableLocalStorage>FALSE</EnableLocalStorage>
+  </CEF>
+  <!-- For AWK host only -->
+  <AWK>
+    <!--<EnableDeveloperTools22>TRUE</EnableDeveloperTools>-->
+  </AWK>
+  <!-- Skin options -->
+  <Skin>
+    <WorkflowPath>workflow.json</WorkflowPath>
+  </Skin>
+</WindowConfig>
